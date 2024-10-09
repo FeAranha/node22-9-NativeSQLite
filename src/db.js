@@ -1,6 +1,16 @@
 import { DatabaseSync } from "node:sqlite"
 
+const database = new DatabaseSync('./db.sqlite')
+
 function runSeed(items) {
+  
+}
+
+export function select(query) {
+
+}
+
+export function insert({table, items}) {
   
 }
 

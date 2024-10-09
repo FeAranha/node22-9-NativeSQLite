@@ -1,1 +1,3 @@
-console.log('Hello world')
+import { select } from "./db.js"
+
+select()
