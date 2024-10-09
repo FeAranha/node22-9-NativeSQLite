@@ -25,7 +25,8 @@ export function insert({table, items}) {
   const { text, values } = sqlBricks.insertInto(table, items)
     .toParams({ placeholder: '?' })
 
-  console.log({ text, values})
+  const insertStatement = database.prepare(text)
+  insertStatement.run(...values)  
 }
 
 runSeed([
