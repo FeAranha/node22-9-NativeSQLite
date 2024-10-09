@@ -16,12 +16,12 @@ function runSeed(items) {
     `)
       insert({ table: 'students', items })
 
-      const query = sqlBricks
-        .select('name,phone')
-        .orderBy('name')
-        .from('students')
-        .toString()
-      console.log(select(query))
+      // const query = sqlBricks
+      //   .select('name,phone')
+      //   .orderBy('name')
+      //   .from('students')
+      //   .toString()
+      // console.log(select(query))
 }
 
 export function select(query) {
