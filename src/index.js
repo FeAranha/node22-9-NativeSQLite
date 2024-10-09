@@ -1,11 +1,11 @@
 import { createServer } from "node:http"
 import { setTimeout } from "node:timers/promises"
-import { select } from "./db.js"
+import { select, insert } from "./db.js"
 import sqlBricks from "sql-bricks"
 import { once } from "node:events"
 
 createServer(async (request, response) => {
-  if (request.method === 'GET') {
+  if(request.method === 'GET') {
 
     const query = sqlBricks
       .select('name,phone')
@@ -16,11 +16,14 @@ createServer(async (request, response) => {
   return response.end(JSON.stringify(items))
   }
 
-  if (request.method === 'POST') {
-    const item = await once(request, 'data')
-    1;
-  }
+  if(request.method === 'POST') {
+    const item = JSON.parse(await once(request, 'data'))
+    insert({ table: 'students', items: [item]})
 
+    response.end(JSON.stringify({
+      message: `Student: ${item.name} create with success!`
+    }))
+  }
 })
   .listen(3000, () => console.log('server running at 3000'))
 
