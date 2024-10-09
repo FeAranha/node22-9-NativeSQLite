@@ -1,4 +1,5 @@
 import { DatabaseSync } from "node:sqlite"
+import sqlBricks from "sql-bricks"
 
 const database = new DatabaseSync('./db.sqlite')
 
@@ -13,14 +14,18 @@ function runSeed(items) {
         phone TEXT NOT NULL
       ) STRICT
     `)
+      insert({ table: 'students', items })
 }
 
 export function select(query) {
-
+  
 }
 
 export function insert({table, items}) {
-  
+  const { text, values } = sqlBricks.insertInto(table, items)
+    .toParams({ placeholder: '?' })
+
+  console.log({ text, values})
 }
 
 runSeed([
